@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#d2a0df"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+    <LinearLayout
+        android:layout_marginTop="60dp"
+        android:padding="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:layout_gravity="center_vertical"
+        fresco:roundAsCircle="true"
+        android:id="@+id/my_image_view"
+        fresco:placeholderImage="@drawable/sliding_touxiang"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:textSize="23sp"
+            android:layout_gravity="center_vertical"
+            android:text="椰汁奶茶"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_marginLeft="70dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/female"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </LinearLayout>
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:textSize="19sp"
+            android:layout_marginLeft="20dp"
+            android:text="编辑个性签名"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:paddingLeft="35dp">
+
+        <TextView
+            android:id="@+id/takecare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/my_takecare"
+            android:drawableRight="@drawable/sliding_xiangyoua"
+            android:text="    我的关注                              "
+            android:textColor="#383838"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/my_collection"
+            android:text="    我的收藏                              "
+            android:textColor="#383838"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/search_friend"
+            android:text="    搜索好友                              "
+            android:textColor="#383838"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/messages"
+            android:text="    消息通知                              "
+            android:textColor="#383838"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:paddingLeft="30dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/night"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/night_colse"
+            android:text="  夜间模式"
+            android:textColor="#383838"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/my_directory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/directory"
+            android:text="我的作品"
+            android:textColor="#383838"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center_horizontal"
+            android:id="@+id/settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/settings"
+            android:text="设置"
+            android:textColor="#383838"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</LinearLayout>

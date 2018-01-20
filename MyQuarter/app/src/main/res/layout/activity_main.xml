@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.menglucywhh.myquarter.view.activity.MainActivity">
+
+    <RelativeLayout
+        android:background="#03A9F4"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            fresco:roundAsCircle="true"
+            android:id="@+id/touxiang"
+            fresco:placeholderImage="@drawable/sliding_touxiang"
+            android:layout_width="55dp"
+            android:layout_height="55dp" />
+
+        <TextView
+            android:id="@+id/top_text"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="#fff"
+            android:layout_centerInParent="true"
+            android:text="推荐"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/edit"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/frag_relative"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:layout_above="@+id/radio_group" >
+        </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:checked="true"
+                android:textColor="@drawable/radio_textcolor_selector"
+                android:drawableTop="@drawable/recommend_selector"
+                android:textSize="21sp"
+                android:id="@+id/radio_recommend"
+                android:gravity="center"
+                android:padding="8dp"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="推荐" />
+
+            <RadioButton
+                android:textColor="@drawable/radio_textcolor_selector"
+                android:drawableTop="@drawable/smile_selector"
+                android:gravity="center"
+                android:padding="8dp"
+                android:button="@null"
+                android:textSize="21sp"
+                android:id="@+id/radio_smile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="段子" />
+
+            <RadioButton
+                android:drawableTop="@drawable/video_selector"
+                android:textColor="@drawable/radio_textcolor_selector"
+                android:gravity="center"
+                android:padding="8dp"
+                android:button="@null"
+                android:textSize="21sp"
+                android:id="@+id/radio_video"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="视频" />
+
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>
