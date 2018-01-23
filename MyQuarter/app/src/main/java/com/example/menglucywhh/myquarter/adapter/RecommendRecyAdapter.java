@@ -68,7 +68,7 @@ public class RecommendRecyAdapter extends RecyclerView.Adapter<RecyclerView.View
                    if(touClickListener!=null) {
                        touClickListener.click();
                    }
-
+              //
                    MainActivity.touClick();
                }
            });
