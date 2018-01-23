@@ -16,40 +16,10 @@
             ]
         },
         {
-            "outputFile": "E:\\Studio3_WorkSpace\\MyQuarter\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
-            "map": [
-                {
-                    "source": "E:\\Studio3_WorkSpace\\MyQuarter\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "14",
-                        "startColumns": "4",
-                        "startOffsets": "1092",
-                        "endColumns": "42",
-                        "endOffsets": "1130"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "E:\\MyQuarterWorkSpace\\MyQuarter\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "E:\\MyQuarterWorkSpace\\MyQuarter\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "14",
-                        "startColumns": "4",
-                        "startOffsets": "1092",
-                        "endColumns": "42",
-                        "endOffsets": "1130"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "E:\\Studio3_WorkSpace\\MyQuarter\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
-            "map": [
-                {
-                    "source": "E:\\Studio3_WorkSpace\\MyQuarter\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "from": {
                         "startLines": "14",
                         "startColumns": "4",

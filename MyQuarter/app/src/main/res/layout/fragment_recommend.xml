@@ -1,25 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.TabLayout
+    <RelativeLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/tab_layout"
-        app:tabGravity="center"
-        app:tabIndicatorColor="#918D91"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="#03A9F4"
-        app:tabTextAppearance="@style/tablayout_ziti"
-        app:tabTextColor="#03A9F4"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rela"
+        android:layout_alignParentTop="true"
+        android:background="#03A9F4"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            fresco:roundAsCircle="true"
+            android:id="@+id/touxiang"
+            fresco:placeholderImage="@drawable/sliding_touxiang"
+            android:layout_width="55dp"
+            android:layout_height="55dp" />
+
+        <TextView
+            android:id="@+id/top_text"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="#fff"
+            android:layout_centerInParent="true"
+            android:text="推荐"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/edit"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+    </RelativeLayout>
+
+     <!--   <RadioGroup
+            android:id="@+id/radio_group"
+            android:background="#fff"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:textColor="@drawable/textcolor"
+                android:checked="true"
+                android:id="@+id/btn_01"
+                android:textSize="21sp"
+                android:button="@null"
+                android:text="热门"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:textColor="@drawable/textcolor"
+                android:id="@+id/btn_02"
+                android:textSize="21sp"
+                android:button="@null"
+                android:text="关注"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </RadioGroup>-->
+   <com.androidkun.xtablayout.XTabLayout
+       android:layout_below="@+id/rela"
+        android:id="@+id/xTablayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:xTabMode="scrollable"
+        app:xTabIndicatorColor="#03A9F4"
+        app:xTabIndicatorHeight="5dp"
+        app:xTabIndicatorWidth="100dp"
+        app:xTabSelectedTextColor="#03A9F4"
+        app:xTabTextColor="#555555"
+        app:xTabTextSize="21sp"
+        app:xTabMinWidth="240dp"
+        app:xTabMaxWidth="480dp"
         />
 
     <android.support.v4.view.ViewPager
+        android:layout_alignParentBottom="true"
         android:background="#cb90d2"
         android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:adjustViewBounds="true"
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

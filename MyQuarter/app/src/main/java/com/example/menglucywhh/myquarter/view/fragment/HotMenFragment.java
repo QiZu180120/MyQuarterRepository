@@ -19,6 +19,7 @@ public class HotMenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_hotmen,container,false);
+
         return view;
     }
 

@@ -1,16 +1,17 @@
 package com.example.menglucywhh.myquarter.view.activity;
 
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.menglucywhh.myquarter.R;
@@ -19,10 +20,10 @@ import com.example.menglucywhh.myquarter.view.fragment.SmileFragment;
 import com.example.menglucywhh.myquarter.view.fragment.VideoFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.suke.widget.SwitchButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,10 +44,6 @@ public class MainActivity extends AppCompatActivity {
     TextView myDirectory;
     @BindView(R.id.settings)
     TextView settings;
-    @BindView(R.id.touxiang)
-    SimpleDraweeView touxiang;
-    @BindView(R.id.edit)
-    ImageView edit;
     @BindView(R.id.radio_recommend)
     RadioButton radioRecommend;
     @BindView(R.id.radio_smile)
@@ -55,13 +52,14 @@ public class MainActivity extends AppCompatActivity {
     RadioButton radioVideo;
     @BindView(R.id.radio_group)
     RadioGroup radioGroup;
-    @BindView(R.id.top_text)
-    TextView topText;
-    @BindView(R.id.frag_relative)
-    RelativeLayout fragRelative;
-    private SlidingMenu menu;
+    //TextView topText;
+    private static SlidingMenu menu;
+    @BindView(R.id.switchButton)
+    SwitchButton switchButton;
     private FragmentManager manager;
 
+    //默认日间模式
+    private int theme = R.style.AppTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.parse("https://imgsa.baidu.com/forum/pic/item/3bc79f3df8dcd1000ac6c4fa798b4710b8122f96.jpg");
         SimpleDraweeView imageTouXiang = (SimpleDraweeView) findViewById(R.id.my_image_view);
         imageTouXiang.setImageURI(uri);
-
 
         //侧滑页面底部我的作品图标
         Drawable drawable_directory = getResources().getDrawable(R.drawable.directory);
@@ -141,12 +138,12 @@ public class MainActivity extends AppCompatActivity {
         radioVideo.setCompoundDrawables(null, drawable_video_unselected, null, null);
 
         //顶部文字默认显示 推荐
-        topText.setText("推荐");
+        //topText.setText("推荐");
         manager = getSupportFragmentManager();
 
         RecommendFragment recommendFragment = new RecommendFragment();
         //进入页面默认展示 推荐页面
-        manager.beginTransaction().replace(R.id.frag_relative,recommendFragment).commit();
+        manager.beginTransaction().replace(R.id.frag_linear, recommendFragment).commit();
         //radiogroup的选择切换改变
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -169,9 +166,9 @@ public class MainActivity extends AppCompatActivity {
                         radioVideo.setCompoundDrawables(null, drawable_video_unselected, null, null);
 
                         //顶部的文字改变
-                        topText.setText("推荐");
+                        //topText.setText("推荐");
                         //事务替换布局
-                        transaction.replace(R.id.frag_relative,new RecommendFragment());
+                        transaction.replace(R.id.frag_linear, new RecommendFragment());
 
                         break;
                     case R.id.radio_smile://段子按钮,选中段子,把其他的变灰
@@ -187,9 +184,9 @@ public class MainActivity extends AppCompatActivity {
                         drawable_video_unselected1.setBounds(0, 0, 60, 60);//60,60为宽高
                         radioVideo.setCompoundDrawables(null, drawable_video_unselected1, null, null);
                         //顶部的文字改变
-                        topText.setText("段子");
+                        //topText.setText("段子");
                         //事务替换布局
-                        transaction.replace(R.id.frag_relative,new SmileFragment());
+                        transaction.replace(R.id.frag_linear, new SmileFragment());
                         break;
                     case R.id.radio_video://视频按钮,选中视频,把其他的变灰
                         Drawable drawable_video_selected = getResources().getDrawable(R.drawable.video_selected);
@@ -202,10 +199,10 @@ public class MainActivity extends AppCompatActivity {
                         Drawable drawable_smile_unselected1 = getResources().getDrawable(R.drawable.smile_unselected);
                         drawable_smile_unselected1.setBounds(0, 0, 60, 60);//60,60为宽高
                         radioSmile.setCompoundDrawables(null, drawable_smile_unselected1, null, null);
-                         //顶部的文字改变
-                        topText.setText("视频");
+                        //顶部的文字改变
+                        //topText.setText("视频");
                         //事务替换布局
-                        transaction.replace(R.id.frag_relative,new VideoFragment());
+                        transaction.replace(R.id.frag_linear, new VideoFragment());
                         break;
                 }
                 //事务提交,否则无效果
@@ -213,23 +210,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //切换日间夜间按钮点击事件
+        messages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                if (mode == Configuration.UI_MODE_NIGHT_YES) {
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else if (mode == Configuration.UI_MODE_NIGHT_NO) {
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+
+                recreate();
+            }
+        });
+       //仿iphone开关的监听,选中时 未选中时候
+        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                if(isChecked){
+                    //设置夜间模式打开
+                    Drawable drawable_night_open = getResources().getDrawable(R.drawable.night_open);
+                    drawable_night_open.setBounds(0, 0, 35, 35);//40,40为宽高
+                    night.setCompoundDrawables(drawable_night_open, null, null, null);
+
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    recreate();
+                }else{
+                    //设置夜间模式关闭
+                    Drawable drawable_night_colse = getResources().getDrawable(R.drawable.night_colse);
+                    drawable_night_colse.setBounds(0, 0, 35, 35);//40,40为宽高
+                    night.setCompoundDrawables(drawable_night_colse, null, null, null);
+
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    recreate();
+                }
+
+            }
+        });
     }
 
-    /**
-     * 点击事件
-     */
-    @OnClick({R.id.touxiang, R.id.edit})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.touxiang:
-                //为侧滑菜单设置布局
-                menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);//全屏滑出
-                menu.showMenu();
-                menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);//不可以滑出,只可以点击
-                break;
-            case R.id.edit:
-                break;
-        }
+    //静态方法,可以类名.调用,在适配器里面点击头像时候调用
+    public static void touClick() {
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);//全屏滑出
+        menu.showMenu();
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);//不可以滑出,只可以点击
     }
 
 

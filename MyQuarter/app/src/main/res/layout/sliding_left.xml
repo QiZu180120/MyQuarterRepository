@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#fff"
     android:layout_width="match_parent"
@@ -101,6 +102,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:paddingRight="30dp"
         android:gravity="center_vertical"
         android:paddingLeft="30dp"
         android:orientation="horizontal"
@@ -110,12 +112,22 @@
 
         <TextView
             android:id="@+id/night"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/night_colse"
             android:text="  夜间模式"
             android:textColor="#383838"
             android:textSize="18sp" />
+
+        <!--设置关闭选择器-->
+        <com.suke.widget.SwitchButton
+            app:sb_checkline_color="#f00"
+            android:id="@+id/switchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fresco:sb_background="#F0F0F2"
+            app:sb_show_indicator="false"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_marginBottom="20dp"
