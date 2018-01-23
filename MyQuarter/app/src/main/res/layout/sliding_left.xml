@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#fff"
+    android:id="@+id/sliding_linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="#d2a0df"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3">
@@ -55,7 +55,6 @@
         android:layout_weight="5"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#ffffff"
         android:orientation="vertical"
         android:paddingLeft="35dp">
 
@@ -67,7 +66,6 @@
             android:drawableLeft="@drawable/my_takecare"
             android:drawableRight="@drawable/sliding_xiangyoua"
             android:text="    我的关注                              "
-            android:textColor="#383838"
             android:textSize="18sp" />
 
         <TextView
@@ -77,7 +75,6 @@
             android:layout_marginTop="30dp"
             android:drawableLeft="@drawable/my_collection"
             android:text="    我的收藏                              "
-            android:textColor="#383838"
             android:textSize="18sp" />
 
         <TextView
@@ -87,7 +84,6 @@
             android:layout_marginTop="30dp"
             android:drawableLeft="@drawable/search_friend"
             android:text="    搜索好友                              "
-            android:textColor="#383838"
             android:textSize="18sp" />
 
         <TextView
@@ -97,7 +93,6 @@
             android:layout_marginTop="30dp"
             android:drawableLeft="@drawable/messages"
             android:text="    消息通知                              "
-            android:textColor="#383838"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -117,7 +112,6 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/night_colse"
             android:text="  夜间模式"
-            android:textColor="#383838"
             android:textSize="18sp" />
 
         <!--设置关闭选择器-->
@@ -144,8 +138,8 @@
             android:layout_height="wrap_content"
             android:drawableTop="@drawable/directory"
             android:text="我的作品"
-            android:textColor="#383838"
             android:textSize="18sp" />
+
         <TextView
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
@@ -155,7 +149,6 @@
             android:layout_height="wrap_content"
             android:drawableTop="@drawable/settings"
             android:text="设置"
-            android:textColor="#383838"
             android:textSize="18sp" />
     </RelativeLayout>
 </LinearLayout>

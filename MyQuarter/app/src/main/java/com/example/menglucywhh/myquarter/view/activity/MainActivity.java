@@ -1,20 +1,23 @@
 package com.example.menglucywhh.myquarter.view.activity;
 
-import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
+import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.menglucywhh.myquarter.R;
+import com.example.menglucywhh.myquarter.utils.ThemeManager;
 import com.example.menglucywhh.myquarter.view.fragment.RecommendFragment;
 import com.example.menglucywhh.myquarter.view.fragment.SmileFragment;
 import com.example.menglucywhh.myquarter.view.fragment.VideoFragment;
@@ -26,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ThemeManager.OnThemeChangeListener {
 
     @BindView(R.id.takecare)
     TextView takecare;
@@ -56,15 +59,22 @@ public class MainActivity extends AppCompatActivity {
     private static SlidingMenu menu;
     @BindView(R.id.switchButton)
     SwitchButton switchButton;
+    @BindView(R.id.linearlayout)
+    LinearLayout linearlayout;
+    @BindView(R.id.sliding_linear)
+    LinearLayout slidingLinear;
     private FragmentManager manager;
 
     //默认日间模式
     private int theme = R.style.AppTheme;
+    private ActionBar supportActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ThemeManager.registerThemeChangeListener(this);
+        supportActionBar = getSupportActionBar();
 
         //new出SlidingMenu对象
         menu = new SlidingMenu(this);
@@ -79,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
         // 设置渐入渐出效果的值
         menu.setFadeDegree(0.35f);
 
-
-//123
         //绑定
         menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
         //为侧滑菜单设置布局
@@ -213,41 +221,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //切换日间夜间按钮点击事件
-        messages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-                if (mode == Configuration.UI_MODE_NIGHT_YES) {
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                } else if (mode == Configuration.UI_MODE_NIGHT_NO) {
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
 
-                recreate();
-            }
-        });
-       //仿iphone开关的监听,选中时 未选中时候
+        //仿iphone开关的监听,选中时 未选中时候
         switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     //设置夜间模式打开
                     Drawable drawable_night_open = getResources().getDrawable(R.drawable.night_open);
                     drawable_night_open.setBounds(0, 0, 35, 35);//40,40为宽高
                     night.setCompoundDrawables(drawable_night_open, null, null, null);
 
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    recreate();
-                }else{
+                    ThemeManager.setThemeMode(ThemeManager.getThemeMode() == ThemeManager.ThemeMode.DAY
+                            ? ThemeManager.ThemeMode.NIGHT : ThemeManager.ThemeMode.DAY);
+                } else {
                     //设置夜间模式关闭
                     Drawable drawable_night_colse = getResources().getDrawable(R.drawable.night_colse);
                     drawable_night_colse.setBounds(0, 0, 35, 35);//40,40为宽高
                     night.setCompoundDrawables(drawable_night_colse, null, null, null);
-
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    recreate();
+                    ThemeManager.setThemeMode(ThemeManager.getThemeMode() == ThemeManager.ThemeMode.DAY
+                            ? ThemeManager.ThemeMode.NIGHT : ThemeManager.ThemeMode.DAY);
                 }
+
+            }
+        });
+        switchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onThemeChanged();
 
             }
         });
@@ -260,5 +261,32 @@ public class MainActivity extends AppCompatActivity {
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);//不可以滑出,只可以点击
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ThemeManager.unregisterThemeChangeListener(this);
+    }
 
+
+    @Override
+    public void onThemeChanged() {
+        initTheme();
+
+    }
+
+    private void initTheme() {
+        //侧滑的页面变黑
+        slidingLinear.setBackgroundColor(getResources().getColor(ThemeManager.getCurrentThemeRes(MainActivity.this, R.color.backgroundColor)));
+
+        linearlayout.setBackgroundColor(getResources().getColor(ThemeManager.getCurrentThemeRes(MainActivity.this, R.color.backgroundColor)));
+        // 设置标题栏颜色
+        if (supportActionBar != null) {
+            supportActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(ThemeManager.getCurrentThemeRes(MainActivity.this, R.color.colorPrimary))));
+        }
+        // 设置状态栏颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.setStatusBarColor(getResources().getColor(ThemeManager.getCurrentThemeRes(MainActivity.this, R.color.colorPrimary)));
+        }
+    }
 }
