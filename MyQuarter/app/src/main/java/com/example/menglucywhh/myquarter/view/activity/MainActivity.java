@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         menu.setFadeDegree(0.35f);
 
 
-        
+//123
         //绑定
         menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
         //为侧滑菜单设置布局
