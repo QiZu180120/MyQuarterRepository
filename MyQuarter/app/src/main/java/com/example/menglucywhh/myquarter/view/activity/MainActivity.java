@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         menu.setBehindOffset(210);
         // 设置渐入渐出效果的值
         menu.setFadeDegree(0.35f);
+        
         //绑定
         menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
         //为侧滑菜单设置布局
